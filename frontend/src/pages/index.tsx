@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 
 import { Input } from "../components/Input";
+import { Button } from "../components/Button";
 
 import logoImg from "../../public/Logo.svg";
 
@@ -20,6 +21,9 @@ export default function Home() {
           <form>
             <Input placeholder="Digite seu email" type="email" />
             <Input placeholder="Digite sua senha" type="password" />
+            <Button type="submit" loading={false}>
+              Acessar
+            </Button>
           </form>
         </div>
       </div>
