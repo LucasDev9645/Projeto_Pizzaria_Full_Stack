@@ -1,7 +1,28 @@
+import Head from "next/head";
+import Image from "next/image";
+
+import { Input } from "../components/Input";
+
+import logoImg from "../../public/Logo.svg";
+
+import styles from "../../styles/home.module.scss";
+
 export default function Home() {
   return (
-    <div>
-      <h1>Sujeito Pizza</h1>
-    </div>
+    <>
+      <Head>
+        <title>SujeitoPizza - Faça seu login</title>
+      </Head>
+      <div className={styles.containerCenter}>
+        <Image src={logoImg} alt="Logo sujeito Pizzaria" />
+
+        <div className={styles.login}>
+          <form>
+            <Input placeholder="Digite seu email" type="email" />
+            <Input placeholder="Digite sua senha" type="password" />
+          </form>
+        </div>
+      </div>
+    </>
   );
 }
