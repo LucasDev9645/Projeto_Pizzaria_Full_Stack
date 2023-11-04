@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useState } from "react";
 import Router from "next/router";
 import { destroyCookie, setCookie, parseCookies } from "nookies";
+import { toast } from "react-toastify";
 
 import { api } from "../services/apiClient";
 
@@ -70,8 +71,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       api.defaults.headers["Authorization"] = `Bearer ${token}`;
 
+      toast.success("Login efetuado com sucesso!");
+
       Router.push("/dashboard");
     } catch (err) {
+      toast.error("Falha ao efetuar ao login!");
       console.log(err);
     }
   }
@@ -83,8 +87,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
         email,
         password,
       });
+      toast.success("Cadastro efetuado com sucesso!");
       Router.push("/");
     } catch (err) {
+      toast.error("Falha ao efetuar o cadastro!");
       console.log("erro ao cadastrar:", err);
     }
   }
