@@ -1,16 +1,19 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useContext } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
+import { AuthContext } from "@/src/context/AuthContext";
 
 import logoImg from "../../../public/Logo.svg";
 
 import styles from "../../../styles/home.module.scss";
 
 export default function SignUp() {
+  const { signUp } = useContext(AuthContext);
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,6 +22,14 @@ export default function SignUp() {
   async function handleSignUp(e: FormEvent) {
     e.preventDefault();
     try {
+      setLoading(true);
+      let data = {
+        name,
+        email,
+        password,
+      };
+      signUp(data);
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
