@@ -1,3 +1,4 @@
+import { FormEvent, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,6 +11,19 @@ import logoImg from "../../../public/Logo.svg";
 import styles from "../../../styles/home.module.scss";
 
 export default function SignUp() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleSignUp(e: FormEvent) {
+    e.preventDefault();
+    try {
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <>
       <Head>
@@ -19,11 +33,29 @@ export default function SignUp() {
         <Image src={logoImg} alt="Logo sujeito Pizzaria" />
 
         <div className={styles.login}>
-          <form>
-            <Input placeholder="Nome da empresa" type="email" />
-            <Input placeholder="Digite seu email" type="email" />
-            <Input placeholder="Digite sua senha" type="password" />
-            <Button type="submit" loading={false}>
+          <form onSubmit={handleSignUp}>
+            <Input
+              placeholder="Nome da empresa"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+            <Input
+              placeholder="Digite seu email"
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <Input
+              placeholder="Digite sua senha"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <Button type="submit" loading={loading}>
               Cadastrar
             </Button>
           </form>
