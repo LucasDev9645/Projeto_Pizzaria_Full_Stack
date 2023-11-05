@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { AuthContext } from "../context/AuthContext";
+import { canSSRGuest } from "../utils/canSSRGuest";
 
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";
@@ -74,3 +75,9 @@ export default function Home() {
     </>
   );
 }
+
+export const getServerSideProps = canSSRGuest(async (ctx) => {
+  return {
+    props: {},
+  };
+});
