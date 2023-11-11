@@ -3,14 +3,26 @@ import Head from "next/head";
 
 import { Header } from "@/src/components/Header";
 import { canSSRAuth } from "@/src/utils/canSSRAuth";
+import { setupApiClient } from "@/src/services/api";
 
 import { FiUpload } from "react-icons/fi";
 
 import styles from "./styles.module.scss";
 
-export default function Product() {
+type ItemProps = {
+  id: string;
+  name: string;
+};
+
+interface CategoryProps {
+  categoryList: ItemProps[];
+}
+
+export default function Product({ categoryList }: CategoryProps) {
   const [avatarUrl, setAvatarUrl] = useState("");
   const [imageAvatar, setImageAvatar] = useState(null);
+  const [categories, setCategories] = useState(categoryList || []);
+  const [categorieSelected, setCategorieSelected] = useState(0);
 
   function handleFile(e: ChangeEvent<HTMLInputElement>) {
     if (!e.target.files) {
@@ -26,6 +38,10 @@ export default function Product() {
       setImageAvatar(image);
       setAvatarUrl(URL.createObjectURL(e.target.files[0]));
     }
+  }
+
+  function handleChangeCategory(e) {
+    setCategorieSelected(e.target.value);
   }
 
   return (
@@ -57,9 +73,10 @@ export default function Product() {
                 />
               )}
             </label>
-            <select>
-              <option>Bebidas</option>
-              <option>Pizzas</option>
+            <select value={categorieSelected} onChange={handleChangeCategory}>
+              {categories.map((item) => (
+                <option key={item.id}>{item.name}</option>
+              ))}
             </select>
             <input
               type="text"
@@ -86,7 +103,13 @@ export default function Product() {
 }
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
+  const apiClient = setupApiClient(ctx);
+
+  const response = await apiClient.get("/categories");
+
   return {
-    props: {},
+    props: {
+      categoryList: response.data,
+    },
   };
 });
