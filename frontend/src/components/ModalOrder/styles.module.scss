@@ -1,11 +1,54 @@
 .container {
+  width: 620px;
+  color: var(--white);
+  background-color: var(--dark-700);
 }
 
-.table {
+.container h2 {
+  margin: 1rem auto;
 }
 
 .containerItem {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+
+  strong {
+    color: var(--green-400);
+  }
+}
+
+.table {
+  font-size: 1.4rem;
+
+  strong {
+    margin-left: 0.3rem;
+  }
 }
 
 .description {
+  margin-top: 0.5rem;
+  word-break: break-all;
+  font-style: italic;
+}
+
+.buttonOrder {
+  margin-top: 1.5rem;
+  background-color: rgba(0, 0, 0, 40%);
+  border: 0;
+  padding: 0.5rem 1rem;
+  border-radius: 0.2rem;
+  color: var(--red-600);
+}
+
+@media screen and (max-width: 700px) {
+  .container {
+    width: 430px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .container {
+    width: 330px;
+  }
 }
