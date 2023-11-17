@@ -4,7 +4,7 @@ import { View, Text } from "react-native";
 export default function Dashboard() {
   return (
     <View>
-      <Text>Tela de Dashboard</Text>
+      <Text>Te amo meu amor...</Text>
     </View>
   );
 }
